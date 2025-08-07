@@ -127,13 +127,13 @@ fun AccountDetailsScreen(
                         item {
                             Text("Basic Info", style = MaterialTheme.typography.titleLarge.copy(textDecoration = TextDecoration.Underline))
                             Spacer(Modifier.height(8.dp))
-                            Text("Name: ${acc.names}")
-                            Text("Gender: ${acc.gender}")
-                            Text("Phone: ${acc.phone}")
-                            Text("KYC Status: ${acc.kycStatus}")
-                            Text("Created At: ${acc.createdAt}")
-                            Text("Updated At: ${acc.updatedAt}")
-                            Text("Notes: ${acc.notes ?: "None"}")
+                            Text("Name: ${acc.accountsDto.names}")
+                            Text("Gender: ${acc.accountsDto.gender}")
+                            Text("Phone: ${acc.accountsDto.phone}")
+                            Text("KYC Status: ${acc.accountsDto.kycStatus}")
+                            Text("Created At: ${acc.accountsDto.createdAt}")
+                            Text("Updated At: ${acc.accountsDto.updatedAt}")
+                            Text("Notes: ${acc.accountsDto.notes ?: "None"}")
                             HorizontalDivider(Modifier.padding(vertical = 8.dp))
                         }
 

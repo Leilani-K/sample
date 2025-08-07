@@ -90,8 +90,8 @@ dependencies {
 
 
     //DataStore
-    implementation("androidx.datastore:datastore:1.1.0") //main datastore
-    implementation("androidx.datastore:datastore-core:1.0.0")
+    implementation("androidx.datastore:datastore:1.1.7") //main datastore
+    implementation("androidx.datastore:datastore-core:1.1.7")
     implementation("com.google.protobuf:protobuf-java:3.25.3")
 
     //splash screen
@@ -102,7 +102,7 @@ dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3")
 
     //for animation in splash screen
-    implementation ("com.airbnb.android:lottie-compose:6.1.0")
+    implementation ("com.airbnb.android:lottie-compose:6.6.7")
 
     //retrofit for APIs
     implementation ("com.google.code.gson:gson:2.9.1")
@@ -111,14 +111,14 @@ dependencies {
     implementation("com.squareup.okhttp3:logging-interceptor:4.12.0")
 
 
-    implementation ("androidx.compose.material:material:1.6.0")
-    implementation ("androidx.compose.runtime:runtime-livedata:1.6.0")
-    implementation ("androidx.lifecycle:lifecycle-runtime-ktx:2.6.1")
+    implementation ("androidx.compose.material:material:1.8.3")
+    implementation ("androidx.compose.runtime:runtime-livedata:1.8.3")
+    implementation ("androidx.lifecycle:lifecycle-runtime-ktx:2.9.2")
     implementation ("androidx.lifecycle:lifecycle-viewmodel-compose:2.6.1")
 
-    implementation("androidx.datastore:datastore-preferences:1.0.0")
+    implementation("androidx.datastore:datastore-preferences:1.1.7")
 
-    implementation("androidx.compose.material:material:1.5.0") // for SwipeToDismiss
+    implementation("androidx.compose.material:material:1.8.3") // for SwipeToDismiss
     implementation("com.google.accompanist:accompanist-swiperefresh:0.33.2-alpha") // for SwipeRefresh
 
     debugImplementation("com.github.chuckerteam.chucker:library:4.0.0")

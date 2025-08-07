@@ -3,16 +3,8 @@ package com.example.gettingstartedwithjetpackcompose.data.network.accountsNetwor
 import com.google.gson.annotations.SerializedName
 
 data class FullAccountDetailsDto(
-    val names: String?,
-    val uuid: String?,
-    val phone: String?,
-    val gender: String?,
-    val code: String?,
-    @SerializedName("kyc_status") val kycStatus: String?,
-    @SerializedName("created_at") val createdAt: String?,
-    @SerializedName("updated_at") val updatedAt: String?,
-    val notes: String?,
-
+    //account with wallet and dependants details
+    val accountsDto: AccountsDto,
     val wallets: List<WalletDto> = emptyList(),
     val dependants: List<DependantDto> = emptyList()
 )
