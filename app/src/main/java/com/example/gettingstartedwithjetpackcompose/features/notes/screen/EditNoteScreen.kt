@@ -36,6 +36,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.gettingstartedwithjetpackcompose.features.notes.viewModel.NotesHomeViewModel
+import com.example.gettingstartedwithjetpackcompose.ui.theme.Roboto
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
 
@@ -95,13 +96,14 @@ fun EditNoteScreen(
             BasicTextField(
                 value = title,
                 onValueChange = viewModel::updateTitle,
-                textStyle = TextStyle(fontSize = 28.sp, fontWeight = FontWeight.Bold, color = Color.Black),
+                textStyle = TextStyle(fontSize = 28.sp, fontWeight = FontWeight.Bold,
+                    color = Color.Black, fontFamily = Roboto),
                 modifier = Modifier.fillMaxWidth() .padding(vertical = 8.dp),
                 singleLine = true,
                 decorationBox = { innerTextField ->
                     if (title.isEmpty()) {
                         Text("Enter a title", style = TextStyle(fontSize = 35.sp, fontWeight = FontWeight.Bold,
-                            color = Color.DarkGray.copy(alpha = 0.7f)))
+                            color = Color.DarkGray.copy(alpha = 0.7f), fontFamily = Roboto) )
                     }
                     innerTextField()
                 },
@@ -117,7 +119,8 @@ fun EditNoteScreen(
             BasicTextField(
                 value = content,
                 onValueChange = viewModel::updateContent,
-                textStyle = TextStyle(fontSize = 18.sp, lineHeight = 24.sp, color = Color.Black),
+                textStyle = TextStyle(fontSize = 18.sp, lineHeight = 24.sp,
+                    color = Color.Black, fontFamily = Roboto),
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(bottom = 32.dp)
@@ -128,10 +131,8 @@ fun EditNoteScreen(
                     if (content.isEmpty()) {
                         Text(
                             text = "Enter a note",
-                            style = TextStyle(
-                            fontSize = 28.sp,
-                            fontWeight = FontWeight.Bold,
-                            color = Color.DarkGray.copy(alpha = 0.7f) )
+                            style = TextStyle( fontSize = 28.sp, fontWeight = FontWeight.Bold,
+                            color = Color.DarkGray.copy(alpha = 0.7f), fontFamily = Roboto)
                         )
                     }
                     innerTextField()
