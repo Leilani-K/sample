@@ -43,6 +43,7 @@ android {
     }
     buildFeatures {
         compose = true
+        buildConfig = true
     }
     //sourceSets {getByName("main") {proto.srcDir("src/main/proto")}}
 
@@ -98,14 +99,14 @@ dependencies {
     implementation("androidx.core:core-splashscreen:1.0.1")
 
     //coroutines
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.3")
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.8.1")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.8.1")
 
     //for animation in splash screen
     implementation ("com.airbnb.android:lottie-compose:6.6.7")
 
     //retrofit for APIs
-    implementation ("com.google.code.gson:gson:2.9.1")
+    implementation ("com.google.code.gson:gson:2.11.0")
     implementation ("com.squareup.retrofit2:retrofit:2.9.0")
     implementation ("com.squareup.retrofit2:converter-gson:2.9.0")
     implementation("com.squareup.okhttp3:logging-interceptor:4.12.0")
@@ -114,7 +115,7 @@ dependencies {
     implementation ("androidx.compose.material:material:1.8.3")
     implementation ("androidx.compose.runtime:runtime-livedata:1.8.3")
     implementation ("androidx.lifecycle:lifecycle-runtime-ktx:2.9.2")
-    implementation ("androidx.lifecycle:lifecycle-viewmodel-compose:2.6.1")
+    implementation ("androidx.lifecycle:lifecycle-viewmodel-compose:2.9.2")
 
     implementation("androidx.datastore:datastore-preferences:1.1.7")
 
@@ -124,11 +125,15 @@ dependencies {
     debugImplementation("com.github.chuckerteam.chucker:library:4.0.0")
     releaseImplementation("com.github.chuckerteam.chucker:library-no-op:4.0.0")
 
+    //Moshi converts between JSON and Kotlin objects
+    implementation("com.squareup.moshi:moshi:1.15.1")
+    implementation("com.squareup.moshi:moshi-kotlin:1.15.1")
+
 
 }
 
 protobuf {
-    protoc { artifact = "com.google.protobuf:protoc:3.25.3"}
+    protoc { artifact = "com.google.protobuf:protoc:3.25.5"}
     generateProtoTasks {
         all().forEach { task -> task.builtins {
             maybeCreate("java")

@@ -63,8 +63,7 @@ import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterialApi::class, ExperimentalMaterial3Api::class, ExperimentalCoroutinesApi::class)
 @Composable
-fun NoteItem( note: Note, onNavigateToEditNote: (Long) -> Unit, modifier: Modifier = Modifier
-) {
+fun NoteItem( note: Note, onNavigateToEditNote: (Long) -> Unit, modifier: Modifier = Modifier) {
     Box(
         modifier = modifier
             .fillMaxWidth()
@@ -83,8 +82,7 @@ fun NoteItem( note: Note, onNavigateToEditNote: (Long) -> Unit, modifier: Modifi
 }
 
 @Composable
-fun SearchBar( query: String, onQueryChange: (String) -> Unit, onSearch: () -> Unit
-) {
+fun SearchBar( query: String, onQueryChange: (String) -> Unit, onSearch: () -> Unit ) {
     val focusManager = LocalFocusManager.current
 
     Box(
@@ -151,6 +149,7 @@ fun NotesHomeScreen(
     val notesToShow = if (query.isBlank()) allNotes else searchResults
 
     Scaffold(
+        snackbarHost = { SnackbarHost(hostState = snackBarHostState) },
         topBar = {
             TopAppBar(
                 title = { Text("My Notes") },
@@ -201,8 +200,6 @@ fun NotesHomeScreen(
                 Icon(Icons.Default.Add, contentDescription = "Add Note")
             }
         },
-        snackbarHost = { SnackbarHost(snackBarHostState) }
-
     ) { innerPadding ->
         Box(
             modifier = Modifier
@@ -233,13 +230,16 @@ fun NotesHomeScreen(
                                 confirmStateChange = {
                                     if (it == DismissValue.DismissedToEnd) {
                                         scope.launch {
-                                            viewModel.deleteNote(note)
-                                            snackBarHostState.showSnackbar("Note deleted")
+                                            val result = snackBarHostState.showSnackbar(
+                                                message = "Delete this note?",
+                                                actionLabel = "Delete", duration = SnackbarDuration.Short)
+                                            if (result == SnackbarResult.ActionPerformed) {
+                                                viewModel.deleteNote(note)
+                                                snackBarHostState.showSnackbar("Note deleted")
+                                            }
                                         }
-                                        true
-                                    } else {
                                         false
-                                    }
+                                    } else false
                                 }
                             )
 

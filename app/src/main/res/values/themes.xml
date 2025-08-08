@@ -5,7 +5,7 @@
 
     <style name="Theme.GettingStartedWithJetpackCompose.Splash" parent="Theme.SplashScreen">
         <item name="windowSplashScreenBackground">@color/white</item>
-        <item name="windowSplashScreenAnimatedIcon">@drawable/enter_logo</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/wired_gradient_globe_icon</item>
 
         <!-- <item name="windowSplashScreenAnimatedIcon">@raw/globe_animation</item>. This doesn't work because android doesn't support animation files -->
         <item name="postSplashScreenTheme">@style/Theme.GettingStartedWithJetpackCompose</item>

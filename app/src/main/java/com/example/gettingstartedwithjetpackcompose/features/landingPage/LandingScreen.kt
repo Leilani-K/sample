@@ -1,5 +1,7 @@
 package com.example.gettingstartedwithjetpackcompose.features.landingPage
 
+import android.content.Intent
+import android.net.Uri
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -18,6 +20,7 @@ import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Person
+import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Card
 import androidx.compose.material3.Icon
 import androidx.compose.material3.CardDefaults
@@ -26,20 +29,28 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
+import androidx.compose.ui.platform.LocalContext
 import com.example.gettingstartedwithjetpackcompose.R
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.example.gettingstartedwithjetpackcompose.features.navigation.Routes
+import com.example.gettingstartedwithjetpackcompose.ota.OtaViewModel
+import com.example.gettingstartedwithjetpackcompose.BuildConfig
 
 
 @Composable
@@ -90,7 +101,43 @@ fun LandingScreen(
     username: String,
     onNotesHomeClick: () -> Unit,
     onAccountsDashboardClick: () -> Unit,
+    otaViewModel: OtaViewModel = hiltViewModel()
 ) {
+    val versionInfo by otaViewModel.versionInfo.collectAsState()
+    val context = LocalContext.current
+
+    LaunchedEffect(Unit) {
+        otaViewModel.checkForUpdate()
+    }
+
+    versionInfo?.let { info ->
+        if (info.latestVersionCode > BuildConfig.VERSION_CODE) {
+            AlertDialog(
+                onDismissRequest = { /* Optional */ },
+                title = { Text("Update Available") },
+                text = {
+                    Text("Version ${info.latestVersionName} is available.\n\n${info.releaseNotes}")
+                },
+                confirmButton = {
+                    TextButton(onClick = {
+                        val intent = Intent(Intent.ACTION_VIEW, Uri.parse(info.apkUrl))
+                        context.startActivity(intent)
+                    }) {
+                        Text("Update")
+                    }
+                },
+//                dismissButton = {
+//                    TextButton(onClick = { showDialog }) {
+//                        Text("Later")
+//                    }
+//                }
+            )
+        }
+    }
+
+
+
+
     val navItems = listOf(
         NavCardItem("Notes", painterResource(id = R.drawable.ic_dashboard_notes), onNotesHomeClick),
         NavCardItem("All Accounts", painterResource(id = R.drawable.ic_all_accounts), onAccountsDashboardClick)
@@ -153,4 +200,3 @@ fun LandingScreen(
         }
     }
 }
-
